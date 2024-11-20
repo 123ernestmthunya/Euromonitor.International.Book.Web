@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule, formatCurrency } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router} from '@angular/router';
 import { AuthServiceService } from '../../services/auth-service.service';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
@@ -13,7 +13,8 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 })
 export class LoginComponent {
   loginForm!: FormGroup;
-  private bookService = inject(AuthServiceService);
+  private AuthService = inject(AuthServiceService);
+  private router = inject(Router);
 
   constructor( private fb: FormBuilder){
 
@@ -25,9 +26,12 @@ export class LoginComponent {
 
   onSubmit(){
     if (this.loginForm.valid) {
-      this.bookService.loginUser(this.loginForm.value).subscribe(
+      this.AuthService.loginUser(this.loginForm.value).subscribe(
         (response) => {
            console.log(response)
+           this.AuthService.login();
+           this.AuthService.setUser(response.user);
+           this.router.navigate(['']);
         },
         (error) => {
            console.log(error)

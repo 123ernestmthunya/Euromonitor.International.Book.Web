@@ -8,12 +8,15 @@
         <li class="nav-item">
           <a class="nav-link" href="#login" routerLink="/login">Login</a>
         </li>
+        <li class="nav-item" *ngIf="isLoggedIn">
+          <a class="nav-link" href="#register" routerLink="/subscription">subscriptions</a>
+        </li>
       </ul>
     </div>
   </div>
 </nav>
 <br>
 <div class="container">
-  <app-books-gallery [books]="books$"></app-books-gallery>
+  <app-books-gallery *ngIf="showBooksGallery || isLoggedIn" [books]="books$"></app-books-gallery>
   <router-outlet></router-outlet>
 </div>

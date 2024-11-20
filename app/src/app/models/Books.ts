@@ -1,5 +1,5 @@
 export interface Books {
-    bookID: number
+    bookEntityID: number
     name: string
     description: string
     price: number
@@ -18,4 +18,20 @@ export interface User {
   firstName: string;
   lastName: string;
 }
-  
+
+export interface Subscribe {
+  userID: number
+  bookID: number
+}
+
+export interface Subscription {
+  bookEntityID: number
+  name: string
+  price: number
+  description: string
+  imagePath: string
+}
+
+export interface SubscriptionResponse {
+  subscriptions: Subscription[];
+}
