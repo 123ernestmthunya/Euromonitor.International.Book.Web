@@ -1,13 +1,14 @@
 <div class="container-fluid">
     <div class="row">
+        <h1>Book Catalogue</h1>
         <div class="col-sm-12 col-md-6 col-lg-4 mb-4"  *ngFor="let book of books | async">
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
                   <h5 class="card-title"> {{book.name}}</h5>
                   <h6 class="card-subtitle mb-2 text-body-secondary">{{book.price}}</h6>
                   <p class="card-text">{{book.description}}</p>
-                  <a href="#" class="card-link">Subscribe</a>
-                  <a href="#" class="card-link">Unscribe</a>
+                  <a href="#" aria-disabled="false" class="card-link">Subscribe</a>
+                  <a href="#" class="card-link">Another link</a>
                 </div>
             </div>
         </div>

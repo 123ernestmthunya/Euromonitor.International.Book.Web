@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Books } from '../../Models/Books';
+import { Books } from '../../models/Books';
 import { CommonModule } from '@angular/common'; 
 @Component({
   selector: 'app-books-gallery',

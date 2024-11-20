@@ -1,15 +1,16 @@
 import { Component, inject, OnInit} from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, RouterModule} from '@angular/router';
 import {BooksGalleryComponent} from '../app/components/books-gallery/books-gallery.component';
 import { BooksServicesService } from './services/books-services.service';
 import { Observable } from 'rxjs';
-import { Books } from '../app/Models/Books';
+import { Books } from './models/Books';
 import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,BooksGalleryComponent, CommonModule],
+  imports: [RouterOutlet,BooksGalleryComponent, CommonModule, RouterModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
