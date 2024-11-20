@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { AuthServiceService } from '../../services/auth-service.service';
 import { RouterOutlet, RouterModule, Router} from '@angular/router';
 import {SubscriptionServiceService} from '../../services/subscription-service.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-books-gallery',
@@ -17,6 +18,7 @@ export class BooksGalleryComponent implements OnInit{
   @Input() books!: Observable<Books[]>; 
   private authServiceService = inject(AuthServiceService);
   private subscriptionService = inject(SubscriptionServiceService);
+  private toastrService = inject(ToastrService);
   isLoggedIn = false;
   private router = inject(Router);
   
@@ -28,24 +30,20 @@ export class BooksGalleryComponent implements OnInit{
 
   onSubscribe(bookId: number) {
     if (this.isLoggedIn){
-
-      console.log("user",this.user);
-      //console.log("bookId",this.user);
-
       const subscribe: Subscribe = {
         userID: this.user.userID,  
         bookID: bookId
       };
-
-      console.log("subscribe req",subscribe)
   
       this.subscriptionService.subscribe(subscribe).subscribe(
         response => {
           console.log('Successfully subscribed:', response);
+          this.toastrService.success('Subscribed successfully','Success');
           
         },
         error => {
           console.error('Subscription failed:', error);
+          this.toastrService.error('Error', 'Oops try again...');
   
         }
       );
@@ -53,8 +51,6 @@ export class BooksGalleryComponent implements OnInit{
     } else {
       this.router.navigate(['/login']);
     }
-
-    
   
   }
 

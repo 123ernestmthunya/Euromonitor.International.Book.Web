@@ -1,5 +1,8 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
+    <span class="navbar-text" *ngIf="user">
+        Welcome, {{ user.firstName }}!
+    </span>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item" *ngIf="!isLoggedIn">
@@ -8,7 +11,7 @@
         <li class="nav-item" *ngIf="!isLoggedIn">
           <a class="nav-link" href="#login" routerLink="/login">Login</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="isLoggedIn">
           <a class="nav-link" href="#register" routerLink="/subscription">subscriptions</a>
         </li>
       </ul>
@@ -17,6 +20,6 @@
 </nav>
 <br>
 <div class="container">
-  <app-books-gallery *ngIf="showBooksGallery || isLoggedIn" [books]="books$"></app-books-gallery>
+  <app-books-gallery *ngIf="showBooksGallery" [books]="books$"></app-books-gallery>
   <router-outlet></router-outlet>
 </div>

@@ -3,6 +3,7 @@ import { CommonModule, formatCurrency } from '@angular/common';
 import { RouterModule, Router} from '@angular/router';
 import { AuthServiceService } from '../../services/auth-service.service';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -15,6 +16,7 @@ export class LoginComponent {
   loginForm!: FormGroup;
   private AuthService = inject(AuthServiceService);
   private router = inject(Router);
+  private toastrService = inject(ToastrService);
 
   constructor( private fb: FormBuilder){
 
@@ -32,9 +34,11 @@ export class LoginComponent {
            this.AuthService.login();
            this.AuthService.setUser(response.user);
            this.router.navigate(['']);
+           this.toastrService.success('Success', 'Login successful');
         },
         (error) => {
            console.log(error)
+           this.toastrService.error('Error', 'Oops try again...');
         }
       );
     }

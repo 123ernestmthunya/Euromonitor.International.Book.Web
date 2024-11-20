@@ -4,6 +4,7 @@ import { AuthServiceService } from '../../services/auth-service.service';
 import { Observable } from 'rxjs';
 import {Books, Subscription, SubscriptionResponse} from '../../models/Books'
 import { CommonModule } from '@angular/common'; 
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-subscription',
@@ -17,6 +18,7 @@ export class SubscriptionComponent implements OnInit {
   books!: Subscription[];; 
   private subscriptionService = inject(SubscriptionServiceService);
   private authServiceService = inject(AuthServiceService);
+  private toastrService = inject(ToastrService);
 
   ngOnInit(): void {
     this.getUser();
@@ -28,9 +30,11 @@ export class SubscriptionComponent implements OnInit {
       (response: SubscriptionResponse) => {
         this.books = response.subscriptions; // Cast to Subscription[]
         console.log('Successfully retrieved subscriptions:', this.books);
+        this.toastrService.success('Successfully retrieved subscriptions','Success');
       },
       error => {
         console.error('Subscription failed:', error);
+        this.toastrService.error('Error', 'Oops try again...');
       }
     );
   }
