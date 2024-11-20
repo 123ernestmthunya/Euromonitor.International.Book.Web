@@ -5,6 +5,7 @@ export interface Books {
     price: number
     image: string
     quantity: number
+    imagePath: string;
   }
 
 export interface LoginRequest {
