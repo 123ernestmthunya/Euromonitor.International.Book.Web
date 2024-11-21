@@ -1,11 +1,19 @@
 <div class="container-fluid">
     <div class="row">
+        <div class="col-12" *ngIf="books.length > 0">
+          <h3 class="text-center">Welcome to your subscription!</h3>
+        </div>
+        <div class="col-12" *ngIf="books.length === 0">
+          <h3 class="text-center">No subscriptions found.</h3>
+        </div>
       <div class="col-sm-12 col-md-6 col-lg-4 mb-4" *ngFor="let subscription of books">
         <div class="card" style="width: 18rem;">
+            <img src="{{subscription.book.imagePath}}" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">{{ subscription.book.name }}</h5>
             <h6 class="card-subtitle mb-2 text-body-secondary">{{ subscription.book.price | currency }}</h6>
             <p class="card-text">{{ subscription.book.description }}</p>
+            <p class="card-text">{{ subscription.subscriptionDate | date}}</p>
             <button type="button" class="btn btn-danger" (click)="onUnsubscribe(subscription.subscriptionId)">Unsubscribe</button>
           </div>
         </div>
