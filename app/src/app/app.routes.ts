@@ -5,8 +5,8 @@ import { SubscriptionComponent } from './components/subscription/subscription.co
 import { BooksGalleryComponent } from './components/books-gallery/books-gallery.component';
 
 export const routes = [
-    { path: 'register', component: RegistrationComponent },
-    { path: 'login', component: LoginComponent },
-    { path: 'subscription', component: SubscriptionComponent },
+    { path: 'register', loadComponent: () => import('./components/registration/registration.component').then(l => l.RegistrationComponent)},
+    { path: 'login', loadComponent: () => import('./components/login/login.component') .then(l => l.LoginComponent) },
+    { path: 'subscription', loadComponent: () => import('./components/subscription/subscription.component').then(l => l.SubscriptionComponent)},
     { path: '', component: BooksGalleryComponent }, 
   ];
