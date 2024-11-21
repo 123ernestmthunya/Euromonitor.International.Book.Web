@@ -1,6 +1,6 @@
 import { Component, Input, inject, OnInit} from '@angular/core';
 import { Observable } from 'rxjs';
-import { Books, Subscribe, Subscription } from '../../models/Books';
+import { Book, Subscribe, Subscription } from '../../models/Books';
 import { CommonModule } from '@angular/common'; 
 import { AuthServiceService } from '../../services/auth-service.service';
 import { RouterOutlet, RouterModule, Router} from '@angular/router';
@@ -15,7 +15,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './books-gallery.component.scss'
 })
 export class BooksGalleryComponent implements OnInit{
-  @Input() books!: Observable<Books[]>; 
+  @Input() books!: Observable<Book[]>; 
   private authServiceService = inject(AuthServiceService);
   private subscriptionService = inject(SubscriptionServiceService);
   private toastrService = inject(ToastrService);

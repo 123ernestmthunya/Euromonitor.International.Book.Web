@@ -1,4 +1,4 @@
-export interface Books {
+export interface Book {
     bookEntityID: number
     name: string
     description: string
@@ -33,6 +33,14 @@ export interface Subscription {
   imagePath: string
 }
 
-export interface SubscriptionResponse {
-  subscriptions: Subscription[];
+export interface BookSubscriptionResponse {
+  success: boolean
+  data: BookSubscription[]
+}
+
+export interface BookSubscription {
+  subscriptionId: number
+  book: Book
+  subscriptionDate: string
+  unsubscriptionDate: string
 }

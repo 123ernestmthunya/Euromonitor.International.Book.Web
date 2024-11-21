@@ -1,6 +1,6 @@
 import { Injectable} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Books } from '../models/Books';
+import { Book } from '../models/Books';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -14,7 +14,7 @@ export class BooksServicesService {
 
   }
 
-  getBooks(): Observable<Books[]> {
-    return this.httpClient.get<Books[]>(this.url);
+  getBooks(): Observable<Book[]> {
+    return this.httpClient.get<Book[]>(this.url);
   }
 }

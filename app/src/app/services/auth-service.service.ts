@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Books, LoginRequest, User } from '../models/Books';
+import { Book, LoginRequest, User } from '../models/Books';
 import { Observable } from 'rxjs';
 import { BehaviorSubject } from 'rxjs';
 

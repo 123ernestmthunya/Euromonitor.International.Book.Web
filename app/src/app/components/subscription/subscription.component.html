@@ -1,15 +1,15 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-sm-12 col-md-6 col-lg-4 mb-4"  *ngFor="let book of books">
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                  <h5 class="card-title"> {{book.name}}</h5>
-                  <h6 class="card-subtitle mb-2 text-body-secondary">{{book.price}}</h6>
-                  <p class="card-text">{{book.description}}</p>
-                  <button type="button" class="btn btn-danger" (click)="onUnsbscribe(book.bookEntityID)">Unsubscribe</button>
-                </div>
-            </div>
+      <div class="col-sm-12 col-md-6 col-lg-4 mb-4" *ngFor="let subscription of books">
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title">{{ subscription.book.name }}</h5>
+            <h6 class="card-subtitle mb-2 text-body-secondary">{{ subscription.book.price | currency }}</h6>
+            <p class="card-text">{{ subscription.book.description }}</p>
+            <button type="button" class="btn btn-danger" (click)="onUnsubscribe(subscription.subscriptionId)">Unsubscribe</button>
+          </div>
         </div>
+      </div>
     </div>
-</div>
+  </div>
   
