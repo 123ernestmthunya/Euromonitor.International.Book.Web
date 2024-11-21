@@ -5,6 +5,9 @@
     </span>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="#home" routerLink="/">Home</a>
+        </li>
         <li class="nav-item" *ngIf="!isLoggedIn">
           <a class="nav-link" href="#register" routerLink="/register">Register</a>
         </li>
@@ -12,7 +15,7 @@
           <a class="nav-link" href="#login" routerLink="/login">Login</a>
         </li>
         <li class="nav-item" *ngIf="isLoggedIn">
-          <a class="nav-link" href="#register" routerLink="/subscription">subscriptions</a>
+          <a class="nav-link" href="#subscriptions" routerLink="/subscription">subscriptions</a>
         </li>
       </ul>
     </div>

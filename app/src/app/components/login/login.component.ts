@@ -17,8 +17,9 @@ export class LoginComponent {
   private AuthService = inject(AuthServiceService);
   private router = inject(Router);
   private toastrService = inject(ToastrService);
+  private fb = inject(FormBuilder)
 
-  constructor( private fb: FormBuilder){
+  constructor(){
 
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],

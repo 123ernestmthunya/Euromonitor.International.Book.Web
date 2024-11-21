@@ -28,8 +28,7 @@ export class SubscriptionComponent implements OnInit {
   getSubscriptions(){
     this.subscriptionService.getSubscriptions(this.user.userID).subscribe(
       (response: SubscriptionResponse) => {
-        this.books = response.subscriptions; // Cast to Subscription[]
-        console.log('Successfully retrieved subscriptions:', this.books);
+        this.books = response.subscriptions;
         this.toastrService.success('Successfully retrieved subscriptions','Success');
       },
       error => {
