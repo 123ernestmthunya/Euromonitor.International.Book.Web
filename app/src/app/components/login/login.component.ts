@@ -31,9 +31,11 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       this.AuthService.loginUser(this.loginForm.value).subscribe(
         (response) => {
-           console.log(response)
+           console.log(response.token)
+           localStorage.clear();
            this.AuthService.login();
            this.AuthService.setUser(response.user);
+           localStorage.setItem("token", response.user.token);
            this.router.navigate(['']);
            this.toastrService.success('Success', 'Login successful');
         },

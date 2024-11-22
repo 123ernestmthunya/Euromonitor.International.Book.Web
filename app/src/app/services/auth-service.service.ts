@@ -22,7 +22,7 @@ export class AuthServiceService {
   constructor(private httpClient : HttpClient) { }
 
   login() {
-    this.loggedIn.next(true); // Set user as logged in
+    this.loggedIn.next(true);
   }
   registerUser(User: User): Observable<any> {
     return this.httpClient.post(this.regUrl, User);
@@ -37,7 +37,6 @@ export class AuthServiceService {
   }
 
   getUser() {
-    // Optionally provide a method to get the user synchronously
     return this.userSubject.value;
   }
 }
