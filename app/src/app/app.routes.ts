@@ -4,6 +4,7 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { SubscriptionComponent } from './components/subscription/subscription.component';
 import { BooksGalleryComponent } from './components/books-gallery/books-gallery.component';
 import { authGuard } from './guards/auth.guard';
+import { ComponentNotFoundComponent } from './components/component-not-found/component-not-found.component';
 
 export const routes = [
     { 
@@ -19,6 +20,11 @@ export const routes = [
       canActivate: [authGuard] 
     },
     { 
-      path: '', component: BooksGalleryComponent,
-    }, 
+      path: '',
+      component: BooksGalleryComponent,
+    },
+    { 
+      path: '**',
+      component: ComponentNotFoundComponent
+    }
 ];

@@ -1,29 +1,36 @@
+
 <div class="container-fluid d-flex justify-content-center align-items-center vh-100">
-  <div class="card w-55 mb-3 p-3 m-4">
+  <div class="card shadow-lg w-50 p-4">
     <div class="card-body">
-      <h5 class="card-title">Login</h5>
-      <p class="card-text"> Login and start subscribing to your favourite books and unsubscribe at your own time</p>
+      <h3 class="card-title text-center mb-4">Login</h3>
+      <p class="card-text text-center text-muted">
+        Login and start subscribing to your favorite books. Unsubscribe anytime with ease.
+      </p>
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-        <div class="mb-3 row">
-          <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
-          <input type="text" class="form-control" formControlName="email" id="inputEmail">
-            <div *ngIf="loginForm.get('email')?.invalid && (loginForm.get('email')?.touched || loginForm.get('email')?.dirty)" class="text-danger">
-              <small *ngIf="loginForm.get('email')?.errors?.['required']">Email is required.</small>
-            </div>
+        <!-- Email -->
+        <div class="mb-4">
+          <label for="inputEmail" class="form-label">Email Address</label>
+          <input type="email" class="form-control" formControlName="email" id="inputEmail" placeholder="Enter your email">
+          <div *ngIf="loginForm.get('email')?.invalid && (loginForm.get('email')?.touched || loginForm.get('email')?.dirty)" class="text-danger mt-1">
+            <small *ngIf="loginForm.get('email')?.errors?.['required']">Email is required.</small>
+          </div>
         </div>
-        <div class="mb-3 row">
-          <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
-          <input type="password" formControlName="password" class="form-control" id="inputPassword">
-          <div *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.touched || loginForm.get('password')?.dirty)" class="text-danger">
+        <!-- Password -->
+        <div class="mb-4">
+          <label for="inputPassword" class="form-label">Password</label>
+          <input type="password" class="form-control" formControlName="password" id="inputPassword" placeholder="Enter your password">
+          <div *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.touched || loginForm.get('password')?.dirty)" class="text-danger mt-1">
             <small *ngIf="loginForm.get('password')?.errors?.['required']">Password is required.</small>
           </div>
         </div>
-        <div class="mb-3 row">
+        <!-- Submit Button -->
+        <div class="d-grid">
           <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">Login</button>
         </div>
       </form>
-      <div class="text-center mt-3">
-        <p>Don't have an account? <a routerLink="/register" class="text-primary">Register here</a></p>
+      <!-- Register Link -->
+      <div class="text-center mt-4">
+        <p class="text-muted">Don't have an account? <a routerLink="/register" class="text-primary">Register here</a></p>
       </div>
     </div>
   </div>
