@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Book, LoginRequest, User } from '../models/Books';
+import { PasswordReset, PasswordResetResponse, LoginRequest, User, RegisterReponse, LoginResponse} from '../models/Books';
 import { Observable } from 'rxjs';
 import { BehaviorSubject } from 'rxjs';
 
@@ -10,7 +10,7 @@ import { BehaviorSubject } from 'rxjs';
 export class AuthServiceService {
 
   private regUrl: string = "http://localhost:5029/users/register";
-
+  private passwordResetUrl: string = "http://localhost:5029/password-reset";
   private loginUrl: string = "http://localhost:5029/login"
 
   private loggedIn = new BehaviorSubject<boolean>(false);
@@ -24,12 +24,17 @@ export class AuthServiceService {
   login() {
     this.loggedIn.next(true);
   }
-  registerUser(User: User): Observable<any> {
-    return this.httpClient.post(this.regUrl, User);
+  registerUser(User: User): Observable<RegisterReponse> {
+    return this.httpClient.post<RegisterReponse>(this.regUrl, User);
   }
 
-  loginUser(loginRequest: LoginRequest): Observable<any> {
-    return this.httpClient.post(this.loginUrl, loginRequest);
+  loginUser(loginRequest: LoginRequest): Observable<LoginResponse> {
+    return this.httpClient.post<LoginResponse>(this.loginUrl, loginRequest);
+  }
+
+
+  passwordReset(loginRequest: PasswordReset): Observable<PasswordResetResponse> {
+    return this.httpClient.post<PasswordResetResponse>(this.loginUrl, loginRequest);
   }
 
   setUser(user: any){

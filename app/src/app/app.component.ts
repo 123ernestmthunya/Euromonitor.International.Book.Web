@@ -45,12 +45,12 @@ export class AppComponent implements OnInit{
   canShowBooksGallery(){
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        const systemRoutes = ['/login', '/register', '/subscription'];
+        const systemRoutes = ['/login', '/register', '/subscription', "/password-reset"];
         // if(!systemRoutes.includes(event.url)){
         //   this.showBooksGallery = false
         //   return 
         // }
-        this.showBooksGallery = event.url !== '/login' && event.url !== '/register' && event.url !== '/subscription';
+        this.showBooksGallery = event.url !== '/login' && event.url !== '/register' && event.url !== '/subscription' &&  event.url !== '/password-reset';
         
       }
     });

@@ -44,3 +44,43 @@ export interface BookSubscription {
   subscriptionDate: string
   unsubscriptionDate: string
 }
+
+
+// changes
+export interface RegisterReponse {
+  message: string
+  success: boolean
+  user: RegisterResponseUser
+}
+
+export interface RegisterResponseUser {
+  email: string
+  firstName: string
+  lastName: string
+  userId: number
+}
+
+export interface LoginResponse {
+  message: string
+  success: boolean
+  user: LoginReponseUser
+}
+
+export interface LoginReponseUser{
+  token: string
+  email: string
+}
+
+export interface PasswordReset {
+  email: string
+  password: string
+  confirmPassword: string
+}
+
+export interface PasswordResetResponse {
+  success: boolean
+  message: string
+}
+
+
+

@@ -5,6 +5,7 @@ import { SubscriptionComponent } from './components/subscription/subscription.co
 import { BooksGalleryComponent } from './components/books-gallery/books-gallery.component';
 import { authGuard } from './guards/auth.guard';
 import { ComponentNotFoundComponent } from './components/component-not-found/component-not-found.component';
+import { PasswordResetComponent } from './components/password-reset/password-reset.component';
 
 export const routes = [
     { 
@@ -18,6 +19,10 @@ export const routes = [
       path: 'subscription', 
       loadComponent: () => import('./components/subscription/subscription.component').then(m => m.SubscriptionComponent), 
       canActivate: [authGuard] 
+    },
+    { 
+      path: 'password-reset',
+      component: PasswordResetComponent,
     },
     { 
       path: '',

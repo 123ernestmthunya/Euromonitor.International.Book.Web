@@ -23,6 +23,9 @@
             <small *ngIf="loginForm.get('password')?.errors?.['required']">Password is required.</small>
           </div>
         </div>
+        <div class="mb-4">
+          <p class="text-muted"><a routerLink="/password-reset" class="text-primary">Forgot password</a></p>
+        </div>
         <!-- Submit Button -->
         <div class="d-grid">
           <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">Login</button>
