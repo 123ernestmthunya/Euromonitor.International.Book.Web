@@ -1,6 +1,6 @@
 import { Component, Input, inject, OnInit} from '@angular/core';
 import { Observable } from 'rxjs';
-import { Book, Subscribe, Subscription } from '../../models/Books';
+import { Book, Subscribe, Subscription, LoginReponseUser} from '../../models/Books';
 import { CommonModule } from '@angular/common'; 
 import { AuthServiceService } from '../../services/auth-service.service';
 import { RouterOutlet, RouterModule, Router} from '@angular/router';
@@ -21,21 +21,19 @@ export class BooksGalleryComponent implements OnInit{
   private toastrService = inject(ToastrService);
   isLoggedIn = false;
   private router = inject(Router);
-  
-  user: any;
+  user: LoginReponseUser| null = null;
+
   ngOnInit(): void {
     this.isAuthenticated();
     this.getUser();
   }
 
   onSubscribe(bookId: number) {
+    let subscribe: Subscribe | null = null;
+
     if (this.isLoggedIn){
-      const subscribe: Subscribe = {
-        userID: this.user.userID,  
-        bookID: bookId
-      };
-  
-      this.subscriptionService.subscribe(subscribe).subscribe(
+      subscribe = { bookID: this.user?.userId!, userID: bookId! };
+      this.subscriptionService.subscribe(subscribe!).subscribe(
         response => {
           console.log('Successfully subscribed:', response);
           this.toastrService.success('Subscribed successfully','Success');
@@ -51,7 +49,6 @@ export class BooksGalleryComponent implements OnInit{
     } else {
       this.router.navigate(['/login']);
     }
-  
   }
 
   isAuthenticated() {

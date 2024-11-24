@@ -3,7 +3,6 @@ import { RouterOutlet, RouterModule, Router, NavigationEnd} from '@angular/route
 import { Observable } from 'rxjs';
 import { Book } from './models/Books';
 import { CommonModule } from '@angular/common';
-import { ToastrService } from 'ngx-toastr';
 import {BooksGalleryComponent} from '../app/components/books-gallery/books-gallery.component';
 import { BooksServicesService } from './services/books-services.service';
 import { SubscriptionComponent } from './components/subscription/subscription.component';
@@ -22,7 +21,6 @@ export class AppComponent implements OnInit{
   books$: Observable<Book[]> = new Observable<Book[]>();
   private bookService = inject(BooksServicesService);
   private authServiceService = inject(AuthServiceService);
-  private toastrService = inject(ToastrService);
   private router = inject(Router);
   isLoggedIn = false;
   user:any;
@@ -30,8 +28,8 @@ export class AppComponent implements OnInit{
   title = 'Books';
 
   ngOnInit(): void {
-    this.canShowBooksGallery();
     this.loadBooks();
+    this.showBooks();
     this.isAuthenticated();
     this.getUser();
     
@@ -42,16 +40,16 @@ export class AppComponent implements OnInit{
     });
   }
 
-  canShowBooksGallery(){
+  showBooks(){
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         const systemRoutes = ['/login', '/register', '/subscription', "/password-reset"];
-        // if(!systemRoutes.includes(event.url)){
-        //   this.showBooksGallery = false
-        //   return 
-        // }
-        this.showBooksGallery = event.url !== '/login' && event.url !== '/register' && event.url !== '/subscription' &&  event.url !== '/password-reset';
-        
+        let unkownRoutes = systemRoutes.includes(event.url);
+        this.showBooksGallery = !systemRoutes.includes(event.url) && unkownRoutes;
+      
+        if(event.url === '/'){
+           this.showBooksGallery = true;
+        }
       }
     });
   }
@@ -69,7 +67,11 @@ export class AppComponent implements OnInit{
   getUser(){
     this.authServiceService.user$.subscribe((user) => {
       this.user = user;
-      console.log("login user", this.user)
     });
+  }
+
+  onlogout(){
+    this.authServiceService.logout();
+    this.router.navigate(['']);
   }
 }

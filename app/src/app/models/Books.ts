@@ -69,6 +69,7 @@ export interface LoginResponse {
 export interface LoginReponseUser{
   token: string
   email: string
+  userId: number;
 }
 
 export interface PasswordReset {

@@ -13,17 +13,14 @@ export class AuthServiceService {
   private passwordResetUrl: string = "http://localhost:5029/password-reset";
   private loginUrl: string = "http://localhost:5029/login"
 
-  private loggedIn = new BehaviorSubject<boolean>(false);
+  private loggedIn = new BehaviorSubject<boolean>(this.getInitialAuthState());
   isLoggedIn$ = this.loggedIn.asObservable();
 
-  private userSubject = new BehaviorSubject<any>(null);
-  user$ = this.userSubject.asObservable();
+  private user = new BehaviorSubject<any>(this.getInitialUser());
+  user$ = this.user.asObservable();
 
   constructor(private httpClient : HttpClient) { }
 
-  login() {
-    this.loggedIn.next(true);
-  }
   registerUser(User: User): Observable<RegisterReponse> {
     return this.httpClient.post<RegisterReponse>(this.regUrl, User);
   }
@@ -34,14 +31,41 @@ export class AuthServiceService {
 
 
   passwordReset(loginRequest: PasswordReset): Observable<PasswordResetResponse> {
-    return this.httpClient.post<PasswordResetResponse>(this.loginUrl, loginRequest);
+    return this.httpClient.post<PasswordResetResponse>(this.passwordResetUrl, loginRequest);
+  }
+
+  private getInitialAuthState(): boolean {
+    return localStorage.getItem('isLoggedIn') === 'true';
+  }
+
+  private getInitialUser(): any {
+    const user = localStorage.getItem('user');
+    return user ? JSON.parse(user) : null;
   }
 
   setUser(user: any){
-    this.userSubject.next(user);
+    localStorage.setItem('user', JSON.stringify(user));
+    this.user.next(user);
   }
 
   getUser() {
-    return this.userSubject.value;
+    return this.user.value;
+  }
+
+
+  login() {
+    this.loggedIn.next(true);
+    localStorage.setItem('isLoggedIn', 'true');
+  }
+
+  logout() {
+    this.loggedIn.next(false);
+    this.user.next(null);
+    localStorage.clear();
+    console.log("local storage clear")
+    // localStorage.removeItem('isLoggedIn');
+    // localStorage.removeItem('user');
+    // localStorage.removeItem('token');
+
   }
 }

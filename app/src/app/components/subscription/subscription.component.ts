@@ -2,7 +2,7 @@ import { Component, inject, OnInit} from '@angular/core';
 import {SubscriptionServiceService} from '../../services/subscription-service.service';
 import { AuthServiceService } from '../../services/auth-service.service';
 import { Observable } from 'rxjs';
-import {BookSubscription, BookSubscriptionResponse} from '../../models/Books'
+import {BookSubscription, BookSubscriptionResponse, LoginReponseUser} from '../../models/Books'
 import { CommonModule } from '@angular/common'; 
 import { ToastrService } from 'ngx-toastr';
 
@@ -14,7 +14,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './subscription.component.scss'
 })
 export class SubscriptionComponent implements OnInit {
-  user: any;
+  user: LoginReponseUser | null = null;
   books: BookSubscription[] = [];
   private subscriptionService = inject(SubscriptionServiceService);
   private authServiceService = inject(AuthServiceService);
@@ -26,7 +26,10 @@ export class SubscriptionComponent implements OnInit {
   }
 
   getSubscriptions(){
-    this.subscriptionService.getSubscriptions(this.user.userID).subscribe(
+    if(!this.user){
+       return;
+    }
+    this.subscriptionService.getSubscriptions(this.user?.userId!).subscribe(
       (response: BookSubscriptionResponse) => {
         this.books = response.data;
         this.toastrService.success('Successfully retrieved subscriptions','Success');

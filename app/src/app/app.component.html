@@ -19,6 +19,9 @@
         <li class="nav-item" *ngIf="isLoggedIn">
           <a class="nav-link" href="#subscriptions" outerLinkActive="active" routerLink="/subscription">subscriptions</a>
         </li>
+        <li class="nav-item" *ngIf="isLoggedIn">
+          <a class="nav-link" outerLinkActive="active" (click)="onlogout()">logout</a>
+        </li>
       </ul>
     </div>
   </div>

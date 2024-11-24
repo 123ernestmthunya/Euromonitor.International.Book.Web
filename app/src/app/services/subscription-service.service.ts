@@ -1,5 +1,5 @@
 import { Injectable , inject} from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Subscribe, Subscription, BookSubscriptionResponse} from "../models/Books"
 import { Observable } from 'rxjs';
 
@@ -18,15 +18,21 @@ export class SubscriptionServiceService {
   constructor() { }
 
   subscribe(request: Subscribe): Observable<any> {
-    return this.httpClient.post(this.subscribeUrl, request);
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.httpClient.post(this.subscribeUrl, request, {headers});
   }
 
   getSubscriptions(userId: number): Observable<BookSubscriptionResponse> {
-    return this.httpClient.get<BookSubscriptionResponse>(`${this.subscriptionUrl}${userId}`);
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.httpClient.get<BookSubscriptionResponse>(`${this.subscriptionUrl}${userId}`, {headers});
   }
 
   cancelSubscription(subscriptionId: number): Observable<any> {
-    return this.httpClient.delete(`${this.unsubscribeUrl}/${subscriptionId}`);
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.httpClient.delete(`${this.unsubscribeUrl}/${subscriptionId}`, {headers});
   }
 
 }

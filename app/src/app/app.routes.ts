@@ -9,27 +9,23 @@ import { PasswordResetComponent } from './components/password-reset/password-res
 
 export const routes = [
     { 
-       path: 'register',
-       loadComponent: () => import('./components/registration/registration.component').then(l => l.RegistrationComponent)
+      path: 'register',
+      loadComponent: () => import('./components/registration/registration.component').then(l => l.RegistrationComponent)
     },
     { 
       path: 'login',
       loadComponent: () => import('./components/login/login.component') .then(l => l.LoginComponent) },
-    { 
-      path: 'subscription', 
-      loadComponent: () => import('./components/subscription/subscription.component').then(m => m.SubscriptionComponent), 
-      canActivate: [authGuard] 
-    },
+      {
+         path: 'subscription', component: SubscriptionComponent, canActivate: [authGuard] },
     { 
       path: 'password-reset',
-      component: PasswordResetComponent,
+      component: PasswordResetComponent 
     },
     { 
       path: '',
-      component: BooksGalleryComponent,
-    },
+      component: BooksGalleryComponent },
     { 
-      path: '**',
-      component: ComponentNotFoundComponent
+      path: '**', 
+      component: ComponentNotFoundComponent 
     }
 ];
