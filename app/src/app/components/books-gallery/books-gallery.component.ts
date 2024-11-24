@@ -29,10 +29,15 @@ export class BooksGalleryComponent implements OnInit{
   }
 
   onSubscribe(bookId: number) {
-    let subscribe: Subscribe | null = null;
+    
+    if (this.isLoggedIn)
+    {
+      if (!this.user?.userId) {
+        this.toastrService.error('Unable to subscribe. Please try again.', 'Error');
+        return;
+      }
 
-    if (this.isLoggedIn){
-      subscribe = { bookID: this.user?.userId!, userID: bookId! };
+      const subscribe: Subscribe = { bookID: bookId, userID: this.user?.userId };
       this.subscriptionService.subscribe(subscribe!).subscribe(
         response => {
           console.log('Successfully subscribed:', response);
@@ -46,7 +51,9 @@ export class BooksGalleryComponent implements OnInit{
         }
       );
 
-    } else {
+    } 
+    else 
+    {
       this.router.navigate(['/login']);
     }
   }
